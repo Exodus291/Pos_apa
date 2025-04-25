@@ -54,6 +54,12 @@ export default function TotalData() {
   const handleSelectMenu = useCallback((menuItem) => {
     if (menuItem.stock <= 0) return;
     addPriceToCalculator(menuItem.price);
+     // Reduce the stock of the selected menu item
+     setMenuList((prevMenuList) =>
+      prevMenuList.map((item) =>
+        item.id === menuItem.id ? { ...item, stock: item.stock - 1 } : item
+      )
+    );
   }, [addPriceToCalculator]);
 
   const handleSaveFromCalculator = (entry) => {
